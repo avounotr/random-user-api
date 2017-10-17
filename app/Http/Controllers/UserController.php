@@ -10,7 +10,8 @@ use App\User;
 class UserController extends Controller
 {
     private function handleUserData($user) {
-        return (object) array (
+        return array (
+            'id' => $user['id'],
             'gender' => $user['gender'],
             'name' => (object) array (
                 'title' => $user['nametitle'],
@@ -56,12 +57,12 @@ class UserController extends Controller
     }
 
     public function show($id = -1) {
-        return $id <= 0 ?
+        $user = $id <= 0 ?
             User::offset(mt_rand(1, User::all()->count()))->limit(1)->get()[0] :
             User::find($id);
 
         // Handle user data
-        return handleUserData($user);
+        return $this->handleUserData($user);
     }
 
     public function update(Request $request, $id) {

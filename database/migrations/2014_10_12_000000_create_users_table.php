@@ -29,9 +29,9 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->string('cell');
             $table->string('picture');
-            $table->string('nat');
+            $table->string('nat', 2);
             $table->foreign('nat')->references('code')->on('countries');
-            $table->string('email')->unique();
+            $table->string('email', 40)->unique();
             $table->string('username');
             $table->string('pass');
             $table->string('password');
